@@ -15,6 +15,10 @@ const StoreProvider = ({ children }) => {
     getCategories();
   }, []);
 
+  useEffect(() => {
+    setCategoryActual(categories[0])
+  }, [categories]);
+
   const handleClickCategory = (id) => {
     const category = categories.filter((cat) => cat.id === id);
     setCategoryActual(category[0]);

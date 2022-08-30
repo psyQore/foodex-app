@@ -5,7 +5,7 @@ export default function Layout({ children, page }) {
   return (
     <>
       <Head>
-        <title>Café - </title>
+        <title>Café - {page}</title>
         <meta name="description" content="Food App Express" />
       </Head>
 
@@ -14,7 +14,7 @@ export default function Layout({ children, page }) {
           <Sidebar />
         </aside>
         <main className="md:w-8/12 xl:w-3/4 2xl: 4/5 h-screen overflow-y">
-          {children}
+          <div className="p-10">{children}</div>
         </main>
       </div>
     </>
