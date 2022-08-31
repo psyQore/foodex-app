@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import useStore from "../hooks/useStore";
 import { formatQuantity } from "../helpers";
 
 const ModalProduct = () => {
   const [quantity, setQuantity] = useState(1);
+  const [edition, setEdition] = useState(false);
 
-  const { product, handleChangeModal, handleAddOrder } = useStore();
+  const { product, handleChangeModal, handleAddOrder, order } = useStore();
+
+  useEffect(() => {
+    if (order.some((orderState) => orderState.id === product.id)) {
+      const productEdition = order.find(
+        (orderState) => orderState.id === product.id
+      );
+      setEdition(true);
+      setQuantity(productEdition.quantity);
+    }
+  }, [product, order]);
 
   return (
     <div className="md:flex gap-10">
@@ -98,7 +109,7 @@ const ModalProduct = () => {
           className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded"
           onClick={() => handleAddOrder({ ...product, quantity })}
         >
-          Añadir al Pedido
+          {edition ? "Guardar Cambios" : "Añadir al Pedido"}
         </button>
       </div>
     </div>
