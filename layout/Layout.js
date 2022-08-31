@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Sidebar from "../components/Sidebar";
+import ModalProduct from "../components/ModalProduct";
 import Modal from "react-modal";
 import useStore from "../hooks/useStore";
 
@@ -22,7 +23,7 @@ export default function Layout({ children, page }) {
   return (
     <>
       <Head>
-        <title>Café - {page}</title>
+        <title>{`Café - ${page}`}</title>
         <meta name="description" content="Food App Express" />
       </Head>
 
@@ -36,7 +37,7 @@ export default function Layout({ children, page }) {
       </div>
       {modal && (
         <Modal isOpen={modal} style={customStyles}>
-          <h1>Modal</h1>
+          <ModalProduct />
         </Modal>
       )}
     </>
