@@ -8,6 +8,7 @@ const StoreProvider = ({ children }) => {
   const [categoryActual, setCategoryActual] = useState({});
   const [product, setProduct] = useState({});
   const [modal, setModal] = useState(false);
+  const [order, setOrder] = useState([]);
 
   const getCategories = async () => {
     const { data } = await axios("/api/categories");
@@ -34,6 +35,10 @@ const StoreProvider = ({ children }) => {
     setModal(!modal);
   };
 
+  const handleAddOrder = ({ categoryId, imagen, ...product }) => {
+    setOrder([...order, product]);
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -43,7 +48,8 @@ const StoreProvider = ({ children }) => {
         product,
         handleSetProduct,
         modal,
-        handleChangeModal
+        handleChangeModal,
+        handleAddOrder,
       }}
     >
       {children}

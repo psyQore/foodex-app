@@ -4,8 +4,9 @@ import useStore from "../hooks/useStore";
 import { formatQuantity } from "../helpers";
 
 const ModalProduct = () => {
-  const { product, handleChangeModal } = useStore();
   const [quantity, setQuantity] = useState(1);
+
+  const { product, handleChangeModal, handleAddOrder } = useStore();
 
   return (
     <div className="md:flex gap-10">
@@ -51,16 +52,16 @@ const ModalProduct = () => {
             }}
           >
             <svg
-              class="w-7 h-7"
+              className="w-7 h-7"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
               ></path>
             </svg>
@@ -91,6 +92,14 @@ const ModalProduct = () => {
             </svg>
           </button>
         </div>
+
+        <button
+          type="button"
+          className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded"
+          onClick={() => handleAddOrder({ ...product, quantity })}
+        >
+          Añadir al Pedido
+        </button>
       </div>
     </div>
   );
