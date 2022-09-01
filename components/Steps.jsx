@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import useStore from "../hooks/useStore";
 
 const steps = [
   { step: 1, name: "Menú", url: "/" },
@@ -8,14 +7,13 @@ const steps = [
 ];
 
 const Steps = () => {
-  const { handleChangeStep, step } = useStore();
   const router = useRouter();
 
   const calculateProgress = () => {
     let value;
-    if (step === 1) {
+    if (router.pathname === "/") {
       value = 2;
-    } else if (step === 2) {
+    } else if (router.pathname === "/summary") {
       value = 50;
     } else {
       value = 100;
@@ -33,7 +31,6 @@ const Steps = () => {
             key={step.step}
             onClick={() => {
               router.push(step.url);
-              handleChangeStep(step.step);
             }}
           >
             {step.name}
