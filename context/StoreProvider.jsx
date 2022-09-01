@@ -39,8 +39,22 @@ const StoreProvider = ({ children }) => {
   const handleEditQuantities = (id) => {
     const productUpgrade = order.filter((product) => product.id === id);
     setProduct(productUpgrade[0]);
+    setModal(!modal)
+  };
 
-    setModal(!modal);
+  const handleRemoveProduct = (id) => {
+    const orderUpgrade = order.filter((product) => product.id !== id);
+    setOrder(orderUpgrade);
+    toast.error("Producto Eliminado", {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      transition: Slide,
+    });
   };
 
   const handleAddOrder = ({ categoryId, ...product }) => {
@@ -87,6 +101,7 @@ const StoreProvider = ({ children }) => {
         handleAddOrder,
         order,
         handleEditQuantities,
+        handleRemoveProduct,
       }}
     >
       {children}

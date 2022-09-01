@@ -4,7 +4,7 @@ import { formatQuantity } from "../helpers";
 import useStore from "../hooks/useStore";
 
 const SummaryProduct = ({ product }) => {
-  const { handleEditQuantities } = useStore();
+  const { handleEditQuantities, handleRemoveProduct } = useStore();
 
   return (
     <div className="shadow p-5 mb-3 flex gap-10 items-center">
@@ -52,6 +52,7 @@ const SummaryProduct = ({ product }) => {
         <button
           type="button"
           className="bg-red-700 flex gap-2 px-5 py-2 text-white rounded-md font-bold uppercase shadow-md w-full text-center mt-3"
+          onClick={() => handleRemoveProduct(product.id)}
         >
           <svg
             className="w-6 h-6"
@@ -67,7 +68,7 @@ const SummaryProduct = ({ product }) => {
               d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
             />
           </svg>
-          Editar
+          Eliminar
         </button>
       </div>
     </div>
