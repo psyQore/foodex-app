@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext } from "react";
 import axios from "axios";
 import { toast, Slide } from "react-toastify";
+import { useRouter } from "next/dist/client/router";
 
 const StoreContext = createContext();
 
@@ -10,6 +11,8 @@ const StoreProvider = ({ children }) => {
   const [product, setProduct] = useState({});
   const [modal, setModal] = useState(false);
   const [order, setOrder] = useState([]);
+
+  const router = useRouter();
 
   const getCategories = async () => {
     const { data } = await axios("/api/categories");
@@ -26,6 +29,7 @@ const StoreProvider = ({ children }) => {
   const handleClickCategory = (id) => {
     const category = categories.filter((cat) => cat.id === id);
     setCategoryActual(category[0]);
+    router.push("/")
   };
 
   const handleSetProduct = (product) => {
@@ -39,7 +43,7 @@ const StoreProvider = ({ children }) => {
   const handleEditQuantities = (id) => {
     const productUpgrade = order.filter((product) => product.id === id);
     setProduct(productUpgrade[0]);
-    setModal(!modal)
+    setModal(!modal);
   };
 
   const handleRemoveProduct = (id) => {
