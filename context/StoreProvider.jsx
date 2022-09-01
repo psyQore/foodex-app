@@ -36,7 +36,7 @@ const StoreProvider = ({ children }) => {
     setModal(!modal);
   };
 
-  const handleAddOrder = ({ categoryId, imagen, ...product }) => {
+  const handleAddOrder = ({ categoryId, ...product }) => {
     if (order.some((productState) => productState.id === product.id)) {
       const updatedOrder = order.map((productState) =>
         productState.id === product.id ? product : productState
