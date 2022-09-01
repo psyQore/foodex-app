@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import axios from "axios";
+import { toast, Slide } from "react-toastify";
 
 const StoreContext = createContext();
 
@@ -41,10 +42,30 @@ const StoreProvider = ({ children }) => {
         productState.id === product.id ? product : productState
       );
       setOrder(updatedOrder);
+      toast.success("Guardado Correctamente", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        transition: Slide,
+      });
     } else {
       setOrder([...order, product]);
+      toast.success("Agregado al Pedido", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        transition: Slide,
+      });
     }
-    setModal(false)
+    setModal(false);
   };
 
   return (

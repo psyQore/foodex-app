@@ -1,8 +1,12 @@
 import Head from "next/head";
 import Sidebar from "../components/Sidebar";
 import ModalProduct from "../components/ModalProduct";
+import Steps from "../components/Steps";
 import Modal from "react-modal";
+import { ToastContainer } from "react-toastify";
 import useStore from "../hooks/useStore";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const customStyles = {
   content: {
@@ -32,7 +36,10 @@ export default function Layout({ children, page }) {
           <Sidebar />
         </aside>
         <main className="md:w-8/12 xl:w-3/4 2xl: 4/5 h-screen overflow-y-scroll">
-          <div className="p-10">{children}</div>
+          <div className="p-10">
+            <Steps />
+            {children}
+          </div>
         </main>
       </div>
       {modal && (
@@ -40,6 +47,8 @@ export default function Layout({ children, page }) {
           <ModalProduct />
         </Modal>
       )}
+
+      <ToastContainer />
     </>
   );
 }
