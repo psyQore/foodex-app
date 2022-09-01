@@ -1,8 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import { formatQuantity } from "../helpers";
+import useStore from "../hooks/useStore";
 
 const SummaryProduct = ({ product }) => {
+  const { handleEditQuantities } = useStore();
+
   return (
     <div className="shadow p-5 mb-3 flex gap-10 items-center">
       <div className="md:w-1/6">
@@ -25,8 +28,9 @@ const SummaryProduct = ({ product }) => {
       </div>
       <div>
         <button
-          className="bg-sky-700 flex gap-2 px-5 py-2 text-white rounded-md font-bold uppercase shadow-md w-full text-center"
           type="button"
+          className="bg-sky-700 flex gap-2 px-5 py-2 text-white rounded-md font-bold uppercase shadow-md w-full text-center"
+          onClick={() => handleEditQuantities(product.id)}
         >
           <svg
             className="w-6 h-6"
@@ -46,8 +50,8 @@ const SummaryProduct = ({ product }) => {
         </button>
 
         <button
-          className="bg-red-700 flex gap-2 px-5 py-2 text-white rounded-md font-bold uppercase shadow-md w-full text-center mt-3"
           type="button"
+          className="bg-red-700 flex gap-2 px-5 py-2 text-white rounded-md font-bold uppercase shadow-md w-full text-center mt-3"
         >
           <svg
             className="w-6 h-6"

@@ -36,6 +36,13 @@ const StoreProvider = ({ children }) => {
     setModal(!modal);
   };
 
+  const handleEditQuantities = (id) => {
+    const productUpgrade = order.filter((product) => product.id === id);
+    setProduct(productUpgrade[0]);
+
+    setModal(!modal);
+  };
+
   const handleAddOrder = ({ categoryId, ...product }) => {
     if (order.some((productState) => productState.id === product.id)) {
       const updatedOrder = order.map((productState) =>
@@ -67,8 +74,6 @@ const StoreProvider = ({ children }) => {
     }
     setModal(false);
   };
-;
-
   return (
     <StoreContext.Provider
       value={{
@@ -81,6 +86,7 @@ const StoreProvider = ({ children }) => {
         handleChangeModal,
         handleAddOrder,
         order,
+        handleEditQuantities,
       }}
     >
       {children}
