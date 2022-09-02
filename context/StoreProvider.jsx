@@ -106,13 +106,32 @@ const StoreProvider = ({ children }) => {
   const putOrder = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/orders", {
+      await axios.post("/api/orders", {
         order,
         name,
         total,
         date: Date.now().toString(),
       });
-      console.log(data);
+
+      setCategoryActual(categories[0]);
+      setOrder([]);
+      setName("");
+      setTotal(0);
+
+      toast.success("Pedido Realizado Correctamente", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        transition: Slide,
+      });
+
+      setTimeout(() => {
+        router.push("/");
+      }, 3000);
     } catch (error) {
       console.log(error);
     }
