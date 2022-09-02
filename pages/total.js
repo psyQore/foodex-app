@@ -1,9 +1,10 @@
 import { useEffect, useCallback } from "react";
 import Layout from "../layout/Layout";
 import useStore from "../hooks/useStore";
+import { formatQuantity } from "../helpers";
 
 export default function Total() {
-  const { order, name, setName } = useStore();
+  const { order, name, setName, putOrder, total } = useStore();
 
   const checkOrder = useCallback(() => {
     return order.length === 0 || name === "" || name.length < 3;
@@ -13,10 +14,7 @@ export default function Total() {
     checkOrder();
   }, [order]);
 
-  const putOrder = (e) => {
-    e.preventDefault();
-    console.log("Enviando Orden");
-  };
+
 
   return (
     <Layout page="Total y Confirmar Pedido">
@@ -41,14 +39,16 @@ export default function Total() {
         </div>
         <div className="mt-10">
           <p className="text-2xl">
-            Total a Pagar {""} <span className="font-bold">$200</span>{" "}
+            Total a Pagar {""} <span className="font-bold">${formatQuantity(total)}</span>{" "}
           </p>
         </div>
         <div className="mt-5">
           <input
             type="submit"
             className={` ${
-              checkOrder() ? "bg-indigo-300" : " bg-indigo-600 hover:cursor-pointer"
+              checkOrder()
+                ? "bg-indigo-300"
+                : " bg-indigo-600 hover:cursor-pointer"
             } w-full lg:w-auto px-5 py-2 rounded uppercase font-bold text-white text-center`}
             value="Confirmar Pedido"
             disabled={checkOrder()}

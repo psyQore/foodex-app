@@ -12,6 +12,7 @@ const StoreProvider = ({ children }) => {
   const [modal, setModal] = useState(false);
   const [order, setOrder] = useState([]);
   const [name, setName] = useState("");
+  const [total, setTotal] = useState(0);
 
   const router = useRouter();
 
@@ -27,10 +28,18 @@ const StoreProvider = ({ children }) => {
     setCategoryActual(categories[0]);
   }, [categories]);
 
+  useEffect(() => {
+    const newTotal = order.reduce(
+      (total, product) => product.price * product.quantity + total,
+      0
+    );
+    setTotal(newTotal);
+  }, [order]);
+
   const handleClickCategory = (id) => {
     const category = categories.filter((cat) => cat.id === id);
     setCategoryActual(category[0]);
-    router.push("/")
+    router.push("/");
   };
 
   const handleSetProduct = (product) => {
@@ -93,6 +102,12 @@ const StoreProvider = ({ children }) => {
     }
     setModal(false);
   };
+
+  const putOrder = async (e) => {
+    e.preventDefault();
+    console.log("Enviando Orden");
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -108,7 +123,9 @@ const StoreProvider = ({ children }) => {
         handleEditQuantities,
         handleRemoveProduct,
         name,
-        setName
+        setName,
+        putOrder,
+        total,
       }}
     >
       {children}
