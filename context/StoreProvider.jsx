@@ -11,6 +11,7 @@ const StoreProvider = ({ children }) => {
   const [product, setProduct] = useState({});
   const [modal, setModal] = useState(false);
   const [order, setOrder] = useState([]);
+  const [name, setName] = useState("");
 
   const router = useRouter();
 
@@ -106,6 +107,8 @@ const StoreProvider = ({ children }) => {
         order,
         handleEditQuantities,
         handleRemoveProduct,
+        name,
+        setName
       }}
     >
       {children}
